@@ -16,7 +16,7 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
 
     private final CompoundInterestCalculator compoundInterestCalculator;
 
-    public CompoundInterestServiceImpl(CompoundInterestRepository compoundInterestRepository, CompoundInterestCalculator compoundInterestCalculator) {
+    public CompoundInterestServiceImpl(final CompoundInterestRepository compoundInterestRepository, CompoundInterestCalculator compoundInterestCalculator) {
         this.compoundInterestRepository = compoundInterestRepository;
         this.compoundInterestCalculator = compoundInterestCalculator;
     }

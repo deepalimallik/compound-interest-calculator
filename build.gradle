@@ -21,4 +21,5 @@ dependencies {
 	implementation 'org.quartz-scheduler:quartz'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'junit:junit:4.12'
 }

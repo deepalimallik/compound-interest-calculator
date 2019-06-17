@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class CompoundInterestCalculator {
 
 
-    public CompoundInterest interestCalculator(CompoundInterest compoundInterest1){
+   public CompoundInterest interestCalculator(CompoundInterest compoundInterest1){
         CompoundInterest compoundInterest = new CompoundInterest();
         compoundInterest.setCname(compoundInterest1.getCname());
         double newPrinciple = compoundInterest1.getPrinciple() + compoundInterest1.getIncreasingAmount();

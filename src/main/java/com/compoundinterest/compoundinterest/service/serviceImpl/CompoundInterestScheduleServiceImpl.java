@@ -14,7 +14,7 @@ public class CompoundInterestScheduleServiceImpl {
     private final CompoundInterestService compoundInterestService;
     private final CompoundInterestCalculator compoundInterestCalculator;
 
-    public CompoundInterestScheduleServiceImpl(CompoundInterestService compoundInterestService, CompoundInterestCalculator compoundInterestCalculator) {
+    public CompoundInterestScheduleServiceImpl(final CompoundInterestService compoundInterestService, CompoundInterestCalculator compoundInterestCalculator) {
         this.compoundInterestService = compoundInterestService;
         this.compoundInterestCalculator = compoundInterestCalculator;
     }
