@@ -134,6 +134,7 @@ public class CompoundInterest {
                 ", amount=" + amount +
                 ", interest=" + interest +
                 ", cname='" + cname + '\'' +
+                ", increasingAmount=" + increasingAmount +
                 '}';
     }
 }

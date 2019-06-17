@@ -1,6 +1,5 @@
 package com.compoundinterest.compoundinterest.service;
 
-import com.compoundinterest.compoundinterest.dto.CompoundInterestDTO;
 import com.compoundinterest.compoundinterest.model.CompoundInterest;
 
 import java.util.List;

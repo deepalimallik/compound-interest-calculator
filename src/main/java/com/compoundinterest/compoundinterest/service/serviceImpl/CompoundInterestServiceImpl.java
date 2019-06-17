@@ -1,14 +1,10 @@
 package com.compoundinterest.compoundinterest.service.serviceImpl;
 
-import com.compoundinterest.compoundinterest.dto.CompoundInterestDTO;
 import com.compoundinterest.compoundinterest.exception.DataNotFoundException;
 import com.compoundinterest.compoundinterest.model.CompoundInterest;
 import com.compoundinterest.compoundinterest.repository.CompoundInterestRepository;
 import com.compoundinterest.compoundinterest.service.CompoundInterestService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +14,13 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
 
     private final CompoundInterestRepository compoundInterestRepository;
 
-    public CompoundInterestServiceImpl(CompoundInterestRepository compoundInterestRepository) {
+    private final CompoundInterestCalculator compoundInterestCalculator;
+
+    public CompoundInterestServiceImpl(CompoundInterestRepository compoundInterestRepository, CompoundInterestCalculator compoundInterestCalculator) {
         this.compoundInterestRepository = compoundInterestRepository;
+        this.compoundInterestCalculator = compoundInterestCalculator;
     }
+
 
     @Override
     public List<CompoundInterest> findAll() {
@@ -35,31 +35,15 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
 
     @Override
     public void save(CompoundInterest compoundInterest) {
-        /*CompoundInterest compoundInterest1 = new CompoundInterest();
-        compoundInterest1.setPrinciple(compoundInterestDTO.getPrinciple());
-        compoundInterest1.setRate(compoundInterestDTO.getRate());
-        compoundInterest1.setYear(compoundInterestDTO.getYear());
-        compoundInterest1.setNumber(compoundInterestDTO.getNumber());
-
-        double futureValue = compoundInterestDTO.getPrinciple()*Math.pow((1+(compoundInterestDTO.getRate()/compoundInterestDTO.getNumber())),compoundInterestDTO.getYear()*compoundInterestDTO.getNumber());
-
-        compoundInterest1.setAmount(futureValue);
-        compoundInterest1.setInterest(compoundInterest1.getAmount()-compoundInterest1.getPrinciple());
-
-//        compoundInterestDTO.setAmount(compoundInterest1.getPrinciple()*Math.pow((1+(compoundInterest1.getRate()/100.0)),compoundInterest1.getTime()));
-//        compoundInterest.setCI(compoundInterest1.getAmount()-compoundInterest1.getPrinciple());*/
-
-        //compoundInterestRepository.save(compoundInterest1);
-       // return compoundInterestScheduleServiceImpl.scheduleCompoundInterest();
-        compoundInterestRepository.save(compoundInterest);
+        CompoundInterest compoundInterest1 = compoundInterestCalculator.interestCalculator(compoundInterest);
+        compoundInterestRepository.save(compoundInterest1);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update(CompoundInterest compoundInterest) {
         Optional<CompoundInterest> compint = compoundInterestRepository.findByCname(compoundInterest.getCname());
         if(!compint.isPresent()) {
-            throw new DataNotFoundException("jbkj");
+            throw new DataNotFoundException("No Data Found");
         }
 
         CompoundInterest compoundInterest1 = compint.get();
@@ -67,7 +51,6 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
         compoundInterest1.setNumber(compoundInterest.getNumber());
         compoundInterest1.setYear(compoundInterest.getYear());
         compoundInterest1.setRate(compoundInterest.getRate());
-//        double futureValue = compoundInterest.getPrinciple()*Math.pow((1+(compoundInterest.getRate()/compoundInterest.getNumber())),compoundInterest.getYear()*compoundInterest.getNumber());
         compoundInterest1.setAmount(compoundInterest.getAmount());
         compoundInterest1.setInterest(compoundInterest.getInterest());
 
@@ -78,7 +61,7 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
     public CompoundInterest getByCname(String cname) {
         Optional<CompoundInterest> compint = compoundInterestRepository.findByCname(cname);
         if(!compint.isPresent()) {
-            throw new DataNotFoundException("aa");
+            throw new DataNotFoundException("No Data Found");
         }
 
         return compint.get();

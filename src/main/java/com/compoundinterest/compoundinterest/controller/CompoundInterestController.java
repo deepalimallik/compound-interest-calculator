@@ -1,6 +1,5 @@
 package com.compoundinterest.compoundinterest.controller;
 
-import com.compoundinterest.compoundinterest.dto.CompoundInterestDTO;
 import com.compoundinterest.compoundinterest.model.CompoundInterest;
 import com.compoundinterest.compoundinterest.service.CompoundInterestService;
 import org.springframework.http.HttpStatus;
