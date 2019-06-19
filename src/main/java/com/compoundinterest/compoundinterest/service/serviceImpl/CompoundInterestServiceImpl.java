@@ -24,19 +24,23 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
 
     @Override
     public List<CompoundInterest> findAll() {
-        return compoundInterestRepository.findAll();
+       return   compoundInterestRepository.findAll();
+
     }
 
     @Override
     public CompoundInterest findById(Long id) {
         Optional<CompoundInterest> obj = compoundInterestRepository.findById(id);
+        if (null == obj) {
+            throw new DataNotFoundException("something");
+        }
         return obj.get();
     }
 
     @Override
-    public void save(CompoundInterest compoundInterest) {
-        CompoundInterest compoundInterest1 = compoundInterestCalculator.interestCalculator(compoundInterest);
-        compoundInterestRepository.save(compoundInterest1);
+        public void save(CompoundInterest compoundInterest) {
+            CompoundInterest compoundInterest1 = compoundInterestCalculator.interestCalculator(compoundInterest);
+            compoundInterestRepository.save(compoundInterest1);
     }
 
     @Override

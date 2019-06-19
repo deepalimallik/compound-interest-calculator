@@ -19,7 +19,7 @@ public class CompoundInterestScheduleServiceImpl {
         this.compoundInterestCalculator = compoundInterestCalculator;
     }
 
-    @Scheduled(cron = "*/5 * * * * ?")
+    @Scheduled(cron = "*/10 * * * * ?")
     public void scheduleCompoundInterest(){
 
         CompoundInterest compoundInterest1 = compoundInterestService.getByCname("default");
