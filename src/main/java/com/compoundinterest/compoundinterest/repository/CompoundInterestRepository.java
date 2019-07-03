@@ -11,4 +11,5 @@ public interface CompoundInterestRepository<findByCname> extends JpaRepository<C
 
 
     Optional<CompoundInterest> findByCname(String cname);
+
 }
