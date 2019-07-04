@@ -2,6 +2,8 @@ package com.compoundinterest.compoundinterest.model;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "interest")
@@ -13,42 +15,50 @@ public class CompoundInterest {
     private Long id;
 
     @Column(name = "principle")
-    private double principle;
+    private float principle;
 
     @Column(name = "compounding_period")
-    private double number;
+    private float number;
 
     @Column(name = "rate")
-    private double rate;
+    private float rate;
 
-    @Column(name = "year")
-    private double year;
+    @Column(name = "time")
+    private float time;
 
-    @Column(name = "future_value")
+    @Column(name = "future_value_of_series")
     private double amount;
 
-    @Column(name = "compound_interest")
+    @Column(name = "compound_interest_for_principle")
     private double interest;
 
     @Column(name = "cname")
     private String cname;
 
-    @Column(name = "increase_amount")
-    private double increasingAmount;
+    @Column(name = "periodic_deposit")
+    private float monthlyPayment;
+
+    @Column(name = "total")
+    private double total;
+
+    @Column(name = "start_date")
+    private LocalDateTime localDateTime  = LocalDateTime.now();
 
     public CompoundInterest() {
     }
 
-    public CompoundInterest(Long id, double principle, double number, double rate, double year, double amount, double interest, String cname, double increasingAmount) {
+    public CompoundInterest(Long id, float principle, float number, float rate, float time, double amount, double interest, String cname, float monthlyPayment, double total, LocalDateTime localDateTime) {
         this.id = id;
         this.principle = principle;
         this.number = number;
         this.rate = rate;
-        this.year = year;
+        this.time = time;
         this.amount = amount;
         this.interest = interest;
         this.cname = cname;
-        this.increasingAmount = increasingAmount;
+        this.monthlyPayment = monthlyPayment;
+        this.total = total;
+        this.localDateTime = localDateTime;
     }
 
     public Long getId() {
@@ -59,36 +69,36 @@ public class CompoundInterest {
         this.id = id;
     }
 
-    public double getPrinciple() {
+    public float getPrinciple() {
         return principle;
     }
 
-    public void setPrinciple(double principle) {
+    public void setPrinciple(float principle) {
         this.principle = principle;
     }
 
-    public double getNumber() {
+    public float getNumber() {
         return number;
     }
 
-    public void setNumber(double number) {
+    public void setNumber(float number) {
         this.number = number;
     }
 
-    public double getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 
-    public double getYear() {
-        return year;
+    public float getTime() {
+        return time;
     }
 
-    public void setYear(double year) {
-        this.year = year;
+    public void setTime(float time) {
+        this.time = time;
     }
 
     public double getAmount() {
@@ -115,12 +125,28 @@ public class CompoundInterest {
         this.cname = cname;
     }
 
-    public double getIncreasingAmount() {
-        return increasingAmount;
+    public float getMonthlyPayment() {
+        return monthlyPayment;
     }
 
-    public void setIncreasingAmount(double increasingAmount) {
-        this.increasingAmount = increasingAmount;
+    public void setMonthlyPayment(float monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     @Override
@@ -130,11 +156,13 @@ public class CompoundInterest {
                 ", principle=" + principle +
                 ", number=" + number +
                 ", rate=" + rate +
-                ", year=" + year +
+                ", time=" + time +
                 ", amount=" + amount +
                 ", interest=" + interest +
                 ", cname='" + cname + '\'' +
-                ", increasingAmount=" + increasingAmount +
+                ", monthlyPayment=" + monthlyPayment +
+                ", total=" + total +
+                ", localDateTime=" + localDateTime +
                 '}';
     }
 }

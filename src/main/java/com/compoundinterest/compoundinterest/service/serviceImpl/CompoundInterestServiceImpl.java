@@ -53,9 +53,9 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
         CompoundInterest compoundInterest1 = compint.get();
         compoundInterest1.setPrinciple(compoundInterest.getPrinciple());
         compoundInterest1.setNumber(compoundInterest.getNumber());
-        compoundInterest1.setYear(compoundInterest.getYear());
+        compoundInterest1.setTime(compoundInterest.getTime());
         compoundInterest1.setRate(compoundInterest.getRate());
-        compoundInterest1.setAmount(compoundInterest.getAmount());
+        compoundInterest1.setMonthlyPayment(compoundInterest.getMonthlyPayment());
         compoundInterest1.setInterest(compoundInterest.getInterest());
 
     compoundInterestRepository.save(compoundInterest1);
