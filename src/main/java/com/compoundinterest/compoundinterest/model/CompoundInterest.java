@@ -149,20 +149,4 @@ public class CompoundInterest {
         this.localDateTime = localDateTime;
     }
 
-    @Override
-    public String toString() {
-        return "CompoundInterest{" +
-                "id=" + id +
-                ", principle=" + principle +
-                ", number=" + number +
-                ", rate=" + rate +
-                ", time=" + time +
-                ", amount=" + amount +
-                ", interest=" + interest +
-                ", cname='" + cname + '\'' +
-                ", monthlyPayment=" + monthlyPayment +
-                ", total=" + total +
-                ", localDateTime=" + localDateTime +
-                '}';
-    }
 }

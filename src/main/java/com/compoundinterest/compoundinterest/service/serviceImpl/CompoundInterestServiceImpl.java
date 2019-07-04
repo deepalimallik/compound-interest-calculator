@@ -24,33 +24,27 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
 
     @Override
     public List<CompoundInterest> findAll() {
-       return   compoundInterestRepository.findAll();
+       return compoundInterestRepository.findAll();
 
     }
 
     @Override
     public CompoundInterest findById(Long id) {
-        Optional<CompoundInterest> obj = compoundInterestRepository.findById(id);
-        if (null == obj) {
-            throw new DataNotFoundException("something");
-        }
-        return obj.get();
+
+        CompoundInterest compoundInterest = compoundInterestRepository.findById(id).orElseThrow(() -> new DataNotFoundException("Compound Interest Not Found"));
+        return compoundInterest;
     }
 
     @Override
-        public void save(CompoundInterest compoundInterest) {
-            CompoundInterest compoundInterest1 = compoundInterestCalculator.interestCalculator(compoundInterest);
-            compoundInterestRepository.save(compoundInterest1);
+    public void save(CompoundInterest compoundInterest) {
+        CompoundInterest compoundInterest1 = compoundInterestCalculator.interestCalculator(compoundInterest);
+        compoundInterestRepository.save(compoundInterest1);
     }
 
     @Override
     public void update(CompoundInterest compoundInterest) {
-        Optional<CompoundInterest> compint = compoundInterestRepository.findByCname(compoundInterest.getCname());
-        if(!compint.isPresent()) {
-            throw new DataNotFoundException("No Data Found");
-        }
+        CompoundInterest compoundInterest1 = compoundInterestRepository.findByCname(compoundInterest.getCname()).orElseThrow(() -> new DataNotFoundException("Compound Interest Not Found"));
 
-        CompoundInterest compoundInterest1 = compint.get();
         compoundInterest1.setPrinciple(compoundInterest.getPrinciple());
         compoundInterest1.setNumber(compoundInterest.getNumber());
         compoundInterest1.setTime(compoundInterest.getTime());
@@ -63,12 +57,9 @@ public class CompoundInterestServiceImpl implements CompoundInterestService {
 
     @Override
     public CompoundInterest getByCname(String cname) {
-        Optional<CompoundInterest> compint = compoundInterestRepository.findByCname(cname);
-        if(!compint.isPresent()) {
-            throw new DataNotFoundException("No Data Found");
-        }
+        CompoundInterest compoundInterest = compoundInterestRepository.findByCname(cname).orElseThrow(() -> new DataNotFoundException("Compound Interest Not Found"));
 
-        return compint.get();
+        return compoundInterest;
 
     }
 

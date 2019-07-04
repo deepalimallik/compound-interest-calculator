@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CompoundInterestRepository<findByCname> extends JpaRepository<CompoundInterest, Long> {
+public interface CompoundInterestRepository extends JpaRepository<CompoundInterest, Long> {
 
 
     Optional<CompoundInterest> findByCname(String cname);

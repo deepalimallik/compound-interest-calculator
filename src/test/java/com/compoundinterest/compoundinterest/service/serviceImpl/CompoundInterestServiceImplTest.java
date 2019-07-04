@@ -31,14 +31,12 @@ public class CompoundInterestServiceImplTest {
     @InjectMocks
     private CompoundInterestServiceImpl compoundInterestServiceImpl;
 
-    private CompoundInterestService compoundInterestService;
-
     CompoundInterest compoundInterest;
 
     @Before
     public void setUp(){
 
-       compoundInterest = new CompoundInterest(1L, 2000.00, 12, 0.1, 5, 3000, 5, "default", 100);
+       compoundInterest = new CompoundInterest();
     }
 
     @Test
@@ -49,25 +47,17 @@ public class CompoundInterestServiceImplTest {
     }
 
     @Test
-    public void findAll_whenCompoundInterestListIsNullOrSizeZero_thenReturnDataNotFoundException(){
-
-        when(compoundInterestRepository.findAll()).thenReturn(null);
-        compoundInterestServiceImpl.findAll();
-
-    }
-
-    @Test
     public void findById_thenResultCompoundInterestById(){
 
 
         when(compoundInterestRepository.findById(compoundInterest.getId())).thenReturn(Optional.of(compoundInterest));
-       assertEquals(compoundInterest,compoundInterestServiceImpl.findById(1L));
+       assertEquals(compoundInterest,compoundInterestServiceImpl.findById(compoundInterest.getId()));
     }
 
     @Test(expected = DataNotFoundException.class)
     public void findById_whenCompoundInterestIdIsNull_thenReturnDataNotFoundException(){
 
-       when(compoundInterestRepository.findById(compoundInterest.getId())).thenReturn(null);
+       when(compoundInterestRepository.findById(compoundInterest.getId())).thenReturn(Optional.empty());
         compoundInterestServiceImpl.findById(compoundInterest.getId());
     }
 
@@ -106,7 +96,7 @@ public class CompoundInterestServiceImplTest {
     @Test
     public void getByCname_thenResultCname(){
         when(compoundInterestRepository.findByCname(compoundInterest.getCname())).thenReturn(Optional.of(compoundInterest));
-        assertEquals(compoundInterest,compoundInterestServiceImpl.getByCname("default"));
+        assertEquals(compoundInterest,compoundInterestServiceImpl.getByCname(compoundInterest.getCname()));
     }
 
 }
